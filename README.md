@@ -58,12 +58,12 @@ To handle class imbalance, **SMOTE** (Synthetic Minority Oversampling Technique)
 | Metric | Score |
 |---|---|
 | Precision | 0.881 |
-| Recall | 0.988 |
-| F1 Score | 0.932 |
+| Recall | 0.930 |
+| F1 Score | 0.904 |
 
 ### 🔍 Insights
 
-- **High Recall (0.98)** ensures most potential customers are correctly identified
+- **High Recall (0.93)** ensures most potential customers are correctly identified
 - **Slightly lower Precision** indicates manageable false positives
 - **Strong F1 Score** shows balanced overall performance
 
