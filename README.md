@@ -1,5 +1,8 @@
 # MLOps Project - Vehicle Insurance Data Pipeline
 ---
+<img width="1915" height="1037" alt="image" src="https://github.com/user-attachments/assets/837acb37-dbb7-476a-a4d3-54a9753de8c5" />
+
+
 ## 📁 Project Setup and Structure
 
 ### Step 1: Project Template
