@@ -1,152 +1,232 @@
-# MLOps Project - Vehicle Insurance Data Pipeline
----
-<img width="1915" height="1037" alt="image" src="https://github.com/user-attachments/assets/837acb37-dbb7-476a-a4d3-54a9753de8c5" />
+# 🚗 Vehicle Insurance Prediction — MLOps Pipeline
 
+> An end-to-end production-ready Machine Learning system with CI/CD, Docker & AWS deployment
 
-## 📁 Project Setup and Structure
-
-### Step 1: Project Template
-- Start by executing the `template.py` file to create the initial project template, which includes the required folder structure and placeholder files.
-
-### Step 2: Package Management
-- Write the setup for importing local packages in `setup.py` and `pyproject.toml` files.
-- **Tip**: Learn more about these files from `crashcourse.txt`.
-
-### Step 3: Virtual Environment and Dependencies
-- Create a virtual environment and install required dependencies from `requirements.txt`:
-  ```bash
-  conda create -n vehicle python=3.10 -y
-  conda activate vehicle
-  pip install -r requirements.txt
-  ```
-- Verify the local packages by running:
-  ```bash
-  pip list
-  ```
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue?logo=github-actions)](https://github.com/nogiayash/MLOPS-proj1/actions)
+[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker)](https://www.docker.com/)
+[![AWS](https://img.shields.io/badge/AWS-EC2%20%7C%20ECR%20%7C%20S3-FF9900?logo=amazon-aws)](https://aws.amazon.com/)
+[![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-API-000000?logo=flask)](https://flask.palletsprojects.com/)
 
 ---
 
-## 📊 MongoDB Setup and Data Management
+## 📌 Problem Statement
 
-### Step 4: MongoDB Atlas Configuration
-1. Sign up for [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and create a new project.
-2. Set up a free M0 cluster, configure the username and password, and allow access from any IP address (`0.0.0.0/0`).
-3. Retrieve the MongoDB connection string for Python and save it (replace `<password>` with your password).
+Insurance companies need to identify customers likely to purchase vehicle insurance to optimize marketing strategies and reduce operational costs.
 
-### Step 5: Pushing Data to MongoDB
-1. Create a folder named `notebook`, add the dataset, and create a notebook file `mongoDB_demo.ipynb`.
-2. Use the notebook to push data to the MongoDB database.
-3. Verify the data in MongoDB Atlas under Database > Browse Collections.
+**Manual approaches are:**
+- ❌ Time-consuming
+- ❌ Not scalable
+- ❌ Inconsistent
 
----
-
-## 📝 Logging, Exception Handling, and EDA
-
-### Step 6: Set Up Logging and Exception Handling
-- Create logging and exception handling modules. Test them on a demo file `demo.py`.
-
-### Step 7: Exploratory Data Analysis (EDA) and Feature Engineering
-- Analyze and engineer features in the `EDA` and `Feature Engg` notebook for further processing in the pipeline.
+**👉 This project builds a production-ready MLOps pipeline that automates:**
+- ✅ Data ingestion
+- ✅ Model training
+- ✅ Deployment
+- ✅ Real-time predictions
 
 ---
 
-## 📥 Data Ingestion
+## 🎯 Key Highlights
 
-### Step 8: Data Ingestion Pipeline
-- Define MongoDB connection functions in `configuration.mongo_db_connections.py`.
-- Develop data ingestion components in the `data_access` and `components.data_ingestion.py` files to fetch and transform data.
-- Update `entity/config_entity.py` and `entity/artifact_entity.py` with relevant ingestion configurations.
-- Run `demo.py` after setting up MongoDB connection as an environment variable.
-
-### Setting Environment Variables
-- Set MongoDB URL:
-  ```bash
-  # For Bash
-  export MONGODB_URL="mongodb+srv://<username>:<password>...."
-  # For Powershell
-  $env:MONGODB_URL = "mongodb+srv://<username>:<password>...."
-  ```
-- **Note**: On Windows, you can also set environment variables through the system settings.
+| Feature | Status |
+|---|---|
+| End-to-End ML Pipeline | ✅ |
+| MongoDB-based Data Ingestion | ✅ |
+| SMOTE for Class Imbalance | ✅ |
+| CI/CD with GitHub Actions | ✅ |
+| Dockerized Deployment | ✅ |
+| AWS (S3 + EC2 + ECR) Integration | ✅ |
+| Flask API + Web UI | ✅ |
 
 ---
 
-## 🔍 Data Validation, Transformation & Model Training
+## 🏗️ Architecture
 
-### Step 9: Data Validation
-- Define schema in `config.schema.yaml` and implement data validation functions in `utils.main_utils.py`.
-
-### Step 10: Data Transformation
-- Implement data transformation logic in `components.data_transformation.py` and create `estimator.py` in the `entity` folder.
-
-### Step 11: Model Training
-- Define and implement model training steps in `components.model_trainer.py` using code from `estimator.py`.
+```
+MongoDB → Ingestion → Validation → Transformation → Training → Evaluation → S3 → Deployment → Flask App → User
+```
 
 ---
 
-## 🌐 AWS Setup for Model Evaluation & Deployment
+## 📊 Model Performance
 
-### Step 12: AWS Setup
-1. Log in to the AWS console, create an IAM user, and grant `AdministratorAccess`.
-2. Set AWS credentials as environment variables.
-   ```bash
-   # For Bash
-   export AWS_ACCESS_KEY_ID="YOUR_AWS_ACCESS_KEY_ID"
-   export AWS_SECRET_ACCESS_KEY="YOUR_AWS_SECRET_ACCESS_KEY"
-   ```
+To handle class imbalance, **SMOTE** (Synthetic Minority Oversampling Technique) was applied before training.
 
-3. Configure S3 Bucket and add access keys in `constants.__init__.py`.
+**Model used:** Random Forest Classifier
 
-### Step 13: Model Evaluation and Pushing to S3
-- Create an S3 bucket named `my-model-mlopsproj` in the `us-east-1` region.
-- Develop code to push/pull models to/from the S3 bucket in `src.aws_storage` and `entity/s3_estimator.py`.
+| Metric | Score |
+|---|---|
+| Precision | 0.881 |
+| Recall | 0.988 |
+| F1 Score | 0.932 |
 
----
+### 🔍 Insights
 
-## 🚀 Model Evaluation, Model Pusher, and Prediction Pipeline
+- **High Recall (0.98)** ensures most potential customers are correctly identified
+- **Slightly lower Precision** indicates manageable false positives
+- **Strong F1 Score** shows balanced overall performance
 
-### Step 14: Model Evaluation & Model Pusher
-- Implement model evaluation and deployment components.
-- Create `Prediction Pipeline` and set up `app.py` for API integration.
-
-### Step 15: Static and Template Directory
-- Add `static` and `template` directories for web UI.
+> ⚠️ **Note:** The high recall is influenced by SMOTE. Evaluation was done on a separate test set to avoid data leakage.
 
 ---
 
-## 🔄 CI/CD Setup with Docker, GitHub Actions, and AWS
+## 📸 Application Demo
 
-### Step 16: Docker and GitHub Actions
-1. Create `Dockerfile` and `.dockerignore`.
-2. Set up GitHub Actions with AWS authentication by creating secrets in GitHub for:
-   - `AWS_ACCESS_KEY_ID`
-   - `AWS_SECRET_ACCESS_KEY`
-   - `AWS_DEFAULT_REGION`
-   - `ECR_REPO`
+### 🔹 Web Interface
 
-### Step 17: AWS EC2 and ECR
-1. Set up an EC2 instance for deployment.
-2. Install Docker on the EC2 machine.
-3. Connect EC2 as a self-hosted runner on GitHub.
+<img width="1500" height="812" alt="image" src="https://github.com/user-attachments/assets/979f7f90-1241-4c60-a772-560237962a87" />
 
-### Step 18: Final Steps
-1. Open the 5000 port on the EC2 instance.
-2. Access the deployed app by visiting `http://<public_ip>:5000`.
+
+> Users can input customer details and get real-time insurance prediction results.
 
 ---
 
-## 🛠️ Additional Resources
-- **Crash Course on setup.py and pyproject.toml**: See `crashcourse.txt` for details.
-- **GitHub Secrets**: Manage secrets for secure CI/CD pipelines.
+## ⚙️ CI/CD Pipeline
+
+Automated using **GitHub Actions** with two stages:
+
+### 🔷 Continuous Integration
+
+<img width="1568" height="742" alt="image" src="https://github.com/user-attachments/assets/25fe2e56-eda1-4e59-aa0d-ca562cac3827" />
+
+
+### 🔷 Continuous Deployment
+
+<img width="1568" height="672" alt="image" src="https://github.com/user-attachments/assets/3f76a498-103b-46a1-a1ad-07dbb0066e51" />
+
+
+**Pipeline flow:**
+
+1. Code pushed to GitHub
+2. Docker image built
+3. Image pushed to AWS ECR
+4. Deployed on EC2 instance
+5. Application served via container
 
 ---
 
-## 🎯 Project Workflow Summary
+## 🐳 Docker Usage
 
-1. **Data Ingestion** ➔ **Data Validation** ➔ **Data Transformation**
-2. **Model Training** ➔ **Model Evaluation** ➔ **Model Deployment**
-3. **CI/CD Automation** with GitHub Actions, Docker, AWS EC2, and ECR
+```bash
+docker build -t vehicle-mlops .
+docker run -p 5000:5000 vehicle-mlops
+```
 
 ---
 
-This README provides a structured walkthrough of the MLOps project, showcasing the end-to-end pipeline, cloud integration, CI/CD setup, and robust data handling capabilities.
+## ☁️ AWS Deployment
 
+| Service | Purpose |
+|---|---|
+| **AWS S3** | Model artifact storage |
+| **AWS ECR** | Docker image registry |
+| **AWS EC2** | Application hosting |
+
+> ⚠️ **Note:** AWS resources have been terminated to avoid costs, but the project is fully deployable using the provided pipeline.
+
+---
+
+## 🔌 API Usage
+
+**Endpoint:**
+```
+POST /predict
+```
+
+**Request:**
+```json
+{
+  "Gender": 1,
+  "Age": 35,
+  "Driving_License": 1,
+  "Region_Code": 28,
+  "Previously_Insured": 0,
+  "Annual_Premium": 30000,
+  "Policy_Sales_Channel": 26,
+  "Vintage": 120,
+  "Vehicle_Age_1_2_Year": 1,
+  "Vehicle_Damage_Yes": 1
+}
+```
+
+**Response:**
+```json
+{
+  "prediction": "Interested"
+}
+```
+
+---
+
+## 📂 Project Structure
+
+```
+MLOPS-proj1/
+├── src/
+│   ├── components/         # Data ingestion, transformation, training
+│   ├── pipeline/           # Training and prediction pipelines
+│   ├── entity/             # Config and artifact entities
+│   ├── config/             # Configuration management
+│   └── aws_storage/        # S3 interaction utilities
+│
+├── notebook/               # EDA and experimentation
+├── templates/              # HTML templates for Flask UI
+├── static/                 # CSS/JS assets
+├── app.py                  # Flask application entry point
+├── Dockerfile              # Container definition
+└── requirements.txt        # Python dependencies
+```
+
+---
+
+## 🧪 Run Locally
+
+```bash
+# Create and activate environment
+conda create -n vehicle python=3.10 -y
+conda activate vehicle
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start the application
+python app.py
+```
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+MONGODB_URL=your_mongodb_url
+AWS_ACCESS_KEY_ID=your_key
+AWS_SECRET_ACCESS_KEY=your_secret
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Language | Python 3.10 |
+| ML Framework | Scikit-learn |
+| Imbalance Handling | imbalanced-learn (SMOTE) |
+| Web Framework | Flask |
+| Database | MongoDB Atlas |
+| Containerization | Docker |
+| CI/CD | GitHub Actions |
+| Cloud | AWS (S3, EC2, ECR) |
+
+---
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+<p align="center">Made with ❤️ by <a href="https://github.com/nogiayash">nogiayash</a></p>
