@@ -6,7 +6,8 @@
 [![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker)](https://www.docker.com/)
 [![AWS](https://img.shields.io/badge/AWS-EC2%20%7C%20ECR%20%7C%20S3-FF9900?logo=amazon-aws)](https://aws.amazon.com/)
 [![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-API-000000?logo=flask)](https://flask.palletsprojects.com/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi)](https://fastapi.tiangolo.com/)
+
 
 ---
 
@@ -37,14 +38,14 @@ Insurance companies need to identify customers likely to purchase vehicle insura
 | CI/CD with GitHub Actions | ✅ |
 | Dockerized Deployment | ✅ |
 | AWS (S3 + EC2 + ECR) Integration | ✅ |
-| Flask API + Web UI | ✅ |
+| FAST API + Web UI | ✅ |
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-MongoDB → Ingestion → Validation → Transformation → Training → Evaluation → S3 → Deployment → Flask App → User
+MongoDB → Ingestion → Validation → Transformation → Training → Evaluation → S3 → Deployment → App → User
 ```
 
 ---
@@ -171,9 +172,9 @@ MLOPS-proj1/
 │   └── aws_storage/        # S3 interaction utilities
 │
 ├── notebook/               # EDA and experimentation
-├── templates/              # HTML templates for Flask UI
+├── templates/              # HTML templates for Fast API UI
 ├── static/                 # CSS/JS assets
-├── app.py                  # Flask application entry point
+├── app.py                  # entry point (Creating/Running Fast API web server) 
 ├── Dockerfile              # Container definition
 └── requirements.txt        # Python dependencies
 ```
@@ -215,7 +216,7 @@ AWS_SECRET_ACCESS_KEY=your_secret
 | Language | Python 3.10 |
 | ML Framework | Scikit-learn |
 | Imbalance Handling | imbalanced-learn (SMOTE) |
-| Web Framework | Flask |
+| Web Framework | Fast API |
 | Database | MongoDB Atlas |
 | Containerization | Docker |
 | CI/CD | GitHub Actions |
